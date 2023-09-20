@@ -1,17 +1,43 @@
 package co.edu.escuelaing.sparkdockerdemolive;
 
-
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 public class SparkWebServer {
 
-    public static void main(String... args){
+    
+	public static void main(String... args){
         port(getPort());
         get("hello", (req,res) -> "Hello Docker!");
+        get("index", (req, res) -> "operaciones = sen,cos,mag,pal Para utilizar cada operación ingresela en la url ex( localhost:4567/sen?value=10)");
+        get("/sen", (req, res) -> Math.sin(Double.parseDouble(req.queryParams("value"))));
+        get("/mag", (req, res) -> {
+        	int x = Integer.parseInt(req.queryParams("x"));
+        	int y = Integer.parseInt(req.queryParams("y"));
+        	x*=x;
+        	y*=y;
+        	double sum = x+y;
+        	return Math.sqrt(sum);
+        });
+        get("/cos", (req, res) -> Math.cos(Double.parseDouble(req.queryParams("value"))));
+        get("/pal", (req, res) -> {
+        	String str = req.queryParams("value");
+        	String pali = "";
+        	int valueLenght = str.length();
+        	for (int i = 0; i < valueLenght; i++) {
+        		pali+= str.charAt(valueLenght-1-i);
+        	}
+        	if (pali.toLowerCase().equals(str.toLowerCase())) {
+        		return "Es Palindromo";
+        	}else {
+        		return "No es palindromo";
+        	}
+        });
     }
 
-    private static int getPort() {
+    
+
+	private static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
