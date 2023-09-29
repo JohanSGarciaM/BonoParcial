@@ -93,7 +93,7 @@ Luego de realizar la aplicación se crea una imagen en docker y se publica en do
 
 ### Link a docker:
 
-[Johan's DockerHub](https://hub.docker.com/repository/docker/johansgarciam/firstvirtualzation/general`)
+[Johan's DockerHub](https://hub.docker.com/repository/docker/johansgarciam/firstvirtualization/general`)
 
 
 
